@@ -67,6 +67,7 @@ public class OI{
     public double rightstickX;
     public AxisButton rTrigger;
     public AxisButton lTrigger;
+    public int pov1;
     
     public Joystick xboxController2;
 	public JoystickButton leftBumper2;
@@ -83,9 +84,12 @@ public class OI{
     public double rightstickX2;
     public AxisButton rTrigger2;
     public AxisButton lTrigger2;
+    public int pov2;
     
     public boolean isController1;
     public boolean shooterPri;
+    
+    public double shooterInc;
     
 
     public OI() {
@@ -100,6 +104,7 @@ public class OI{
         rTrigger = new AxisButton(xboxController1, 3, 0, 0, false);
         lTrigger = new AxisButton(xboxController1, 2, 0, 0, false);
         select = new JoystickButton(xboxController1, 7);
+        pov1 = xboxController1.getPOV();
         
         
         xboxController2 = new Joystick(1);
@@ -112,6 +117,10 @@ public class OI{
         rTrigger2 = new AxisButton(xboxController2, 3, 0, 0, false);
         lTrigger2 = new AxisButton(xboxController2, 2, 0, 0, false);
         select2 = new JoystickButton(xboxController2, 7);
+        aButton2 = new JoystickButton(xboxController2, 1);
+        yButton2 = new JoystickButton(xboxController2, 4);
+        xButton2 = new JoystickButton(xboxController2, 3);
+        pov2 = xboxController2.getPOV();
         
        // isController1 = false; 
        // shooterPri = true;
@@ -123,11 +132,22 @@ public class OI{
         rTrigger.whenPressed(new RaiseShooter(xboxController1, shooterPri));
         lTrigger.whenPressed(new LowerShooter(xboxController1, shooterPri));
         
-        rTrigger2.whenPressed(new RaiseShooter(xboxController2, shooterPri));
-        lTrigger2.whenPressed(new LowerShooter(xboxController2, shooterPri));
+        //rTrigger2.whenPressed(new RaiseShooter(xboxController2, shooterPri));
+        //lTrigger2.whenPressed(new LowerShooter(xboxController2, shooterPri));
+        
+        rTrigger2.whenPressed(new ShootShooterMotors());
+        lTrigger2.whenPressed(new Intake());
         
         select.whenPressed(new ShooterPriority(true));
         select2.whenPressed(new ShooterPriority(false));
+        
+        //rightBumper2.whileHeld(new ShootShooterMotors());
+        //leftBumper2.whileHeld(new Intake());
+        
+        aButton2.whenPressed(new Kick());
+        yButton2.whenPressed(new RetractKicker());
+        xButton2.whenPressed(new ResetKicker());
+        
         
        
     
@@ -140,7 +160,7 @@ public class OI{
         SmartDashboard.putData("Teleop Drive", new TeleopDrive());
         SmartDashboard.putData("Initialize Gyro", new InitializeGyro());
         SmartDashboard.putBoolean("Shooter Priority", shooterPri);
-        
+        SmartDashboard.putNumber("POV", pov1);        
         
 
 

@@ -28,9 +28,9 @@ public class RaiseShooter extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (shooterPri) {
-    		Robot.shooter.setShooterMotor(Robot.oi.xboxController2.getRawAxis(3));
+    		Robot.shooter.setAngleMotors(Robot.oi.xboxController2.getRawAxis(3)*(-1)*(0.6));
     	} else {
-    		Robot.shooter.setShooterMotor(Robot.oi.xboxController1.getRawAxis(3));
+    		Robot.shooter.setAngleMotors(Robot.oi.xboxController1.getRawAxis(3)*(-1)*(0.6));
     	}
     }
 
@@ -41,7 +41,7 @@ public class RaiseShooter extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.setShooterMotor(0);
+    	Robot.shooter.setAngleMotors(0);
     }
 
     // Called when another command which requires one or more of the same

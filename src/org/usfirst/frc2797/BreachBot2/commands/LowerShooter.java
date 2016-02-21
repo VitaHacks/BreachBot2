@@ -30,9 +30,9 @@ public class LowerShooter extends Command {
     	//Lowering the shooter needs a negative value.
 
     	if (shooterPri) {
-    		Robot.shooter.setShooterMotor(Robot.oi.xboxController2.getRawAxis(2)*(-1));
+    		Robot.shooter.setAngleMotors(Robot.oi.xboxController2.getRawAxis(2)*(0.5));
     	} else {
-    		Robot.shooter.setShooterMotor(Robot.oi.xboxController1.getRawAxis(2)*(-1));
+    		Robot.shooter.setAngleMotors(Robot.oi.xboxController1.getRawAxis(2)*(0.5));
     	}
     }
 
@@ -43,7 +43,7 @@ public class LowerShooter extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.setShooterMotor(0);
+    	Robot.shooter.setAngleMotors(0);
     }
 
     // Called when another command which requires one or more of the same
