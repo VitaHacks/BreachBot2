@@ -2,23 +2,17 @@ package org.usfirst.frc2797.BreachBot2.commands;
 
 import org.usfirst.frc2797.BreachBot2.Robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LowerShooter extends Command {
-	
-	Joystick joystick;
-	boolean shooterPri;
+public class Kick extends Command {
 
-    public LowerShooter(Joystick joystick, boolean shooterPri) {
+    public Kick() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.shooter);
-    	this.joystick = joystick;
-    	this.shooterPri = shooterPri;
     }
 
     // Called just before this Command runs the first time
@@ -27,13 +21,10 @@ public class LowerShooter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Lowering the shooter needs a negative value.
-
-    	if (shooterPri) {
-    		Robot.shooter.setShooterMotor(Robot.oi.xboxController2.getRawAxis(2)*(0.8));
-    	} else {
-    		Robot.shooter.setShooterMotor(Robot.oi.xboxController1.getRawAxis(2)*(0.8));
-    	}
+    	
+    	Robot.shooter.activateKicker();
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,12 +34,10 @@ public class LowerShooter extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.setShooterMotor(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
