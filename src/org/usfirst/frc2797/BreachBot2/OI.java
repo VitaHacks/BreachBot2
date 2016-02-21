@@ -8,196 +8,182 @@
 // update. Deleting the comments indicating the section will prevent
 // it from being updated in the future.
 
-
 package org.usfirst.frc2797.BreachBot2;
 
-import org.usfirst.frc2797.BreachBot2.commands.*;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.*;
-import org.usfirst.frc2797.BreachBot2.subsystems.*;
-import org.usfirst.frc2797.BreachBot2.AxisButton;
+import org.usfirst.frc2797.BreachBot2.commands.AutonomousCommand;
+import org.usfirst.frc2797.BreachBot2.commands.InitializeGyro;
+import org.usfirst.frc2797.BreachBot2.commands.Intake;
+import org.usfirst.frc2797.BreachBot2.commands.Kick;
+import org.usfirst.frc2797.BreachBot2.commands.LowerShooter;
+import org.usfirst.frc2797.BreachBot2.commands.RaiseShooter;
+import org.usfirst.frc2797.BreachBot2.commands.ResetKicker;
+import org.usfirst.frc2797.BreachBot2.commands.RetractKicker;
+import org.usfirst.frc2797.BreachBot2.commands.ShootShooterMotors;
+import org.usfirst.frc2797.BreachBot2.commands.ShooterPriority;
+import org.usfirst.frc2797.BreachBot2.commands.TeleopDrive;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI{
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
+public class OI {
+	//// CREATING BUTTONS
+	// One type of button is a joystick button which is any button on a
+	//// joystick.
+	// You create one by telling it which joystick it's on and which button
+	// number it is.
+	// Joystick stick = new Joystick(port);
+	// Button button = new JoystickButton(stick, buttonNumber);
 
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
+	// There are a few additional built in buttons you can use. Additionally,
+	// by subclassing Button you can create custom triggers and bind those to
+	// commands the same as any other Button.
 
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
+	//// TRIGGERING COMMANDS WITH BUTTONS
+	// Once you have a button, it's trivial to bind it to a button in one of
+	// three ways:
 
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
+	// Start the command when the button is pressed and let it run the command
+	// until it is finished as determined by it's isFinished method.
+	// button.whenPressed(new ExampleCommand());
 
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
+	// Run the command while the button is being held down and interrupt it once
+	// the button is released.
+	// button.whileHeld(new ExampleCommand());
 
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
-
+	// Start the command when the button is released and let it run the command
+	// until it is finished as determined by it's isFinished method.
+	// button.whenReleased(new ExampleCommand());
 
 	public Joystick xboxController1;
 	public JoystickButton leftBumper;
-    public JoystickButton rightBumper;    
-    public JoystickButton xButton;
-    public JoystickButton yButton;
-    public JoystickButton aButton;
-    public JoystickButton bButton;
-    public JoystickButton start;
-    public JoystickButton select;
-    public double leftstickY;
-    public double rightstickY;
-    public double leftstickX;
-    public double rightstickX;
-    public AxisButton rTrigger;
-    public AxisButton lTrigger;
-    public int pov1;
-    
-    public Joystick xboxController2;
+	public JoystickButton rightBumper;
+	public JoystickButton xButton;
+	public JoystickButton yButton;
+	public JoystickButton aButton;
+	public JoystickButton bButton;
+	public JoystickButton start;
+	public JoystickButton select;
+	public double leftstickY;
+	public double rightstickY;
+	public double leftstickX;
+	public double rightstickX;
+	public AxisButton rTrigger;
+	public AxisButton lTrigger;
+	public int pov1;
+
+	public Joystick xboxController2;
 	public JoystickButton leftBumper2;
-    public JoystickButton rightBumper2;    
-    public JoystickButton xButton2;
-    public JoystickButton yButton2;
-    public JoystickButton aButton2;
-    public JoystickButton bButton2;
-    public JoystickButton start2;
-    public JoystickButton select2;
-    public double leftstickY2;
-    public double rightstickY2;
-    public double leftstickX2;
-    public double rightstickX2;
-    public AxisButton rTrigger2;
-    public AxisButton lTrigger2;
-    public int pov2;
-    
-    public boolean isController1;
-    public boolean shooterPri;
-    
-    public double shooterInc;
-    
+	public JoystickButton rightBumper2;
+	public JoystickButton xButton2;
+	public JoystickButton yButton2;
+	public JoystickButton aButton2;
+	public JoystickButton bButton2;
+	public JoystickButton start2;
+	public JoystickButton select2;
+	public double leftstickY2;
+	public double rightstickY2;
+	public double leftstickX2;
+	public double rightstickX2;
+	public AxisButton rTrigger2;
+	public AxisButton lTrigger2;
+	public int pov2;
 
-    public OI() {
+	public boolean isController1;
+	public boolean shooterPri;
 
-        xboxController1 = new Joystick(0);
-        leftBumper = new JoystickButton(xboxController1, 5);
-        rightBumper = new JoystickButton(xboxController1, 6);
-        leftstickY = getLeftStickY(xboxController1);
-        rightstickY = getRightStickY(xboxController1);
-        leftstickX = getLeftStickX(xboxController1);
-        rightstickX = getRightStickX(xboxController1);
-        rTrigger = new AxisButton(xboxController1, 3, 0, 0, false);
-        lTrigger = new AxisButton(xboxController1, 2, 0, 0, false);
-        select = new JoystickButton(xboxController1, 7);
-        pov1 = xboxController1.getPOV();
-        
-        
-        xboxController2 = new Joystick(1);
-        leftBumper2 = new JoystickButton(xboxController2, 5);
-        rightBumper2 = new JoystickButton(xboxController2, 6);
-        leftstickY2 = getLeftStickY(xboxController2);
-        rightstickY2 = getRightStickY(xboxController2);
-        leftstickX2 = getLeftStickX(xboxController2);
-        rightstickX2 = getRightStickX(xboxController2);
-        rTrigger2 = new AxisButton(xboxController2, 3, 0, 0, false);
-        lTrigger2 = new AxisButton(xboxController2, 2, 0, 0, false);
-        select2 = new JoystickButton(xboxController2, 7);
-        aButton2 = new JoystickButton(xboxController2, 1);
-        yButton2 = new JoystickButton(xboxController2, 4);
-        xButton2 = new JoystickButton(xboxController2, 3);
-        pov2 = xboxController2.getPOV();
-        
-       // isController1 = false; 
-       // shooterPri = true;
-        
-       
-        
-        
-        
-        rTrigger.whenPressed(new RaiseShooter(xboxController1, shooterPri));
-        lTrigger.whenPressed(new LowerShooter(xboxController1, shooterPri));
-        
-        //rTrigger2.whenPressed(new RaiseShooter(xboxController2, shooterPri));
-        //lTrigger2.whenPressed(new LowerShooter(xboxController2, shooterPri));
-        
-        rTrigger2.whenPressed(new ShootShooterMotors());
-        lTrigger2.whenPressed(new Intake());
-        
-        select.whenPressed(new ShooterPriority(true));
-        select2.whenPressed(new ShooterPriority(false));
-        
-        //rightBumper2.whileHeld(new ShootShooterMotors());
-        //leftBumper2.whileHeld(new Intake());
-        
-        aButton2.whenPressed(new Kick());
-        yButton2.whenPressed(new RetractKicker());
-        xButton2.whenPressed(new ResetKicker());
-        
-        
-       
-    
-        
+	public double shooterInc;
 
+	public OI() {
 
+		xboxController1 = new Joystick(0);
+		leftBumper = new JoystickButton(xboxController1, 5);
+		rightBumper = new JoystickButton(xboxController1, 6);
+		leftstickY = getLeftStickY(xboxController1);
+		rightstickY = getRightStickY(xboxController1);
+		leftstickX = getLeftStickX(xboxController1);
+		rightstickX = getRightStickX(xboxController1);
+		rTrigger = new AxisButton(xboxController1, 3, 0, 0, false);
+		lTrigger = new AxisButton(xboxController1, 2, 0, 0, false);
+		select = new JoystickButton(xboxController1, 7);
+		pov1 = xboxController1.getPOV();
 
-        // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("Teleop Drive", new TeleopDrive());
-        SmartDashboard.putData("Initialize Gyro", new InitializeGyro());
-        SmartDashboard.putBoolean("Shooter Priority", shooterPri);
-        SmartDashboard.putNumber("POV", pov1);        
-        
+		xboxController2 = new Joystick(1);
+		leftBumper2 = new JoystickButton(xboxController2, 5);
+		rightBumper2 = new JoystickButton(xboxController2, 6);
+		leftstickY2 = getLeftStickY(xboxController2);
+		rightstickY2 = getRightStickY(xboxController2);
+		leftstickX2 = getLeftStickX(xboxController2);
+		rightstickX2 = getRightStickX(xboxController2);
+		rTrigger2 = new AxisButton(xboxController2, 3, 0, 0, false);
+		lTrigger2 = new AxisButton(xboxController2, 2, 0, 0, false);
+		select2 = new JoystickButton(xboxController2, 7);
+		aButton2 = new JoystickButton(xboxController2, 1);
+		yButton2 = new JoystickButton(xboxController2, 4);
+		xButton2 = new JoystickButton(xboxController2, 3);
+		pov2 = xboxController2.getPOV();
 
+		// isController1 = false;
+		// shooterPri = true;
 
-    }
+		rTrigger.whenPressed(new RaiseShooter(xboxController1, shooterPri));
+		lTrigger.whenPressed(new LowerShooter(xboxController1, shooterPri));
 
-    public double getLeftStickY(Joystick joystick) {
-    	return joystick.getRawAxis(1);
-    	
+		// rTrigger2.whenPressed(new RaiseShooter(xboxController2, shooterPri));
+		// lTrigger2.whenPressed(new LowerShooter(xboxController2, shooterPri));
+
+		rTrigger2.whenPressed(new ShootShooterMotors());
+		lTrigger2.whenPressed(new Intake());
+
+		select.whenPressed(new ShooterPriority(true));
+		select2.whenPressed(new ShooterPriority(false));
+
+		// rightBumper2.whileHeld(new ShootShooterMotors());
+		// leftBumper2.whileHeld(new Intake());
+
+		aButton2.whenPressed(new Kick());
+		yButton2.whenPressed(new RetractKicker());
+		xButton2.whenPressed(new ResetKicker());
+
+		// SmartDashboard Buttons
+		SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+		SmartDashboard.putData("Teleop Drive", new TeleopDrive());
+		SmartDashboard.putData("Initialize Gyro", new InitializeGyro());
+		SmartDashboard.putBoolean("Shooter Priority", shooterPri);
+		SmartDashboard.putNumber("POV", pov1);
+
 	}
 
-    public double getRightStickY(Joystick joystick) {
-    	return joystick.getRawAxis(5);
-    	
-    }
-    
-    public double getLeftStickX(Joystick joystick) {
-    	return joystick.getRawAxis(0);
-    	
-    }
-    
-    public double getRightStickX(Joystick joystick) {
-    	return joystick.getRawAxis(4);
-    	
-    }
-    
-    
-      
-    public Joystick getxboxController1() {
-        return xboxController1;
-    }
-    
-    public Joystick getxboxController2() {
-    	return xboxController2;
-    }
+	public double getLeftStickY(Joystick joystick) {
+		return joystick.getRawAxis(1);
 
+	}
 
+	public double getRightStickY(Joystick joystick) {
+		return joystick.getRawAxis(5);
 
+	}
+
+	public double getLeftStickX(Joystick joystick) {
+		return joystick.getRawAxis(0);
+
+	}
+
+	public double getRightStickX(Joystick joystick) {
+		return joystick.getRawAxis(4);
+
+	}
+
+	public Joystick getxboxController1() {
+		return xboxController1;
+	}
+
+	public Joystick getxboxController2() {
+		return xboxController2;
+	}
 
 }
-

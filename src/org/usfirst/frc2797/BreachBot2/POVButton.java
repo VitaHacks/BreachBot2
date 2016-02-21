@@ -4,22 +4,18 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 
 public class POVButton extends Button {
-	
+
 	Joystick joystick;
 	int leftpress;
-	
-	
-	public POVButton(Joystick joystick){
+
+	public POVButton(Joystick joystick) {
 		this.joystick = joystick;
 	}
-	
 
 	@Override
 	public boolean get() {
-		
-		
+
 		return false;
 	}
-	
 
 }
